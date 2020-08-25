@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta name="viewport" charset="utf-8" content="width=device-width, initial-scale=1.0">
+	<title>Exchange Tool</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+		integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+</head>
+
+<body>
+	<dir id="app" :key="exg">
+		<div id="exchange">
+			<h3> CURRENCY: {{ exg }}</h3>
+			<div>
+				<table class="table">
+					<thead>
+					  <tr>
+						<th scope="col">Currency💵 </th>
+						<th scope="col">Rate💰</th>
+					  </tr>
+					</thead>
+					<tbody>
+					  <tr v-for="(rates,currency) in data">
+						<td><a href="#" @click="exg = currency">{{currency}}</a></td>
+						<td>{{ rates}}</td>
+					  </tr>
+					</tbody>
+				  </table>
+			</div>
+
+			<h3> Exhange Calculator:</h3>
+			<div class="calculate">
+
+				<input type="number" v-model.number="inputAmount" ref="input" v-on:keyup="calculate()">
+
+				
+				<select @change="onChangeFrom($event)" v-model="selectedFromCurrency">
+					<option>From</option>
+					<option v-for="(rates,currency) in data">{{currency}}</option>
+				</select>
+				
+				<button>🔁</button>
+
+				<select @change="onChangeTo($event)" v-model="selectedToCurrency">
+					<option>To</option>
+					<option v-for="(rates,currency) in data">{{currency}}</option>
+				</select>
+
+				<input type="number" v-model.number="outputAmount" ref="output" v-on:keyup="calculateBack()">
+
+			
+
+			</div>
+		</div>
+	</dir>
+
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script src="main.js"></script>
+</body>
+
+</html>
